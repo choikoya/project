@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  /* 전체 레이아웃 스타일을 여기에 추가합니다. */
 }
 
 .App-logo {

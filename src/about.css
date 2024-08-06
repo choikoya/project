@@ -1,0 +1,41 @@
+/* about.css */
+.about-section {
+    padding: 4rem 1rem;
+    background-color: #f0f4f8;
+    text-align: center;
+  }
+  
+  .about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .about-section p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+  }
+  
+  .about-services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .about-services .service-card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    margin: 1rem;
+    width: 280px;
+  }
+  
+  .about-services .service-card img {
+    height: 5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .about-services .service-card h4 {
+    font-size: 1.25rem;
+  }

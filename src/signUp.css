@@ -1,0 +1,104 @@
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4; /* Light gray background */
+  }
+  
+  .signup-box {
+    background-color: #ffffff; /* White background for form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333; /* Dark gray for text */
+    text-align: center;
+    font-size: 24px; /* Larger font size for header */
+    font-weight: bold; /* Bold header text */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: normal; /* Normal font weight for labels */
+    color: #333;
+    font-size: 14px; /* Smaller font size for labels */
+  }
+  
+  input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px; /* Font size for input text */
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px; /* Font size for button text */
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn {
+    background-color: #38b2ac; /* Teal color */
+    color: #ffffff; /* White text */
+    font-weight: bold; /* Bold text for submit button */
+  }
+  
+  .submit-btn:hover {
+    background-color: #319d96; /* Slightly darker teal */
+  }
+  
+  .cancel-btn {
+    background-color: #fbbf24; /* Yellow color */
+    color: #333; /* Dark gray text */
+    font-weight: bold; /* Bold text for cancel button */
+    margin-top: 5px; /* Adjust spacing between buttons */
+  }
+  
+  .cancel-btn:hover {
+    background-color: #f59e0b; /* Slightly darker yellow */
+  }
+  
+  .check-email-btn {
+    background-color: #38b2ac;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+    font-size: 14px; /* Font size for check email button */
+  }
+  
+  .check-email-btn:hover {
+    background-color: #319d96;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+  }

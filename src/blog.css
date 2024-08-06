@@ -1,0 +1,41 @@
+/* blog.css */
+.blog-section {
+    padding: 4rem 1rem;
+  }
+  
+  .blog-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .blog-section .blog-post-card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-post-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .blog-post-card .post-content {
+    padding: 1rem;
+  }
+  
+  .blog-post-card .post-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .blog-post-card .post-meta {
+    font-size: 0.875rem;
+    color: #4a5568;
+  }
+  
+  .blog-post-card .post-meta span {
+    margin-left: 1rem;
+  }
