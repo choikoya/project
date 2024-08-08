@@ -1,29 +1,33 @@
 import './App.css';
 import React from 'react';
 import Header from './header';
-import Main from './main';
-import About from './about';
-import Test from './test';
-import Blog from './blog';
-import Cta from './cta';
 import Footer from './footer';
 import Login from './logIn';
 import SignUp from './signUp';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Home from './home'; 
+import Search from './search';
+import RecipeInfo from './recipeInfo';
+import './style.css';
 
 
 function App() {
   return (
-    <div className="App">
-      {/* <Header />
-      <Main />
-      <About />
-      <Test />
-      <Blog />
-      <Cta />
-      <Footer /> */}
-      {/* <Login /> */}
-      <SignUp />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/recipeInfo" element={<RecipeInfo />} />
+        </Routes>
+        <Footer />
+
+      </div>
+    </BrowserRouter>
   );
 }
 

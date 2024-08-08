@@ -1,5 +1,6 @@
 .hero-section {
-    background: linear-gradient(90deg, rgba(49, 130, 206, 1) 0%, rgba(56, 178, 172, 1) 100%);
+    /* background: linear-gradient(90deg, rgba(49, 130, 206, 1) 0%, rgba(56, 178, 172, 1) 100%); */
+    background: linear-gradient(90deg, rgb(172, 215, 255) 0%, rgb(134, 250, 244) 100%);
     color: #fff;
     padding: 4rem 1rem;
     text-align: center;
@@ -16,7 +17,8 @@
   }
   
   .hero-section a {
-    background-color: #38b2ac;
+    /* background-color: #38b2ac; */
+    background-color: #a1fcf7;
     color: #fff;
     padding: 1rem 2rem;
     border-radius: 0.5rem;
