@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import './starRating.css';
 
 export default function StarRating({ onRating }) {
     const [rating, setRating] = useState(0);
@@ -11,7 +12,7 @@ export default function StarRating({ onRating }) {
     };
 
     return (
-        <div className="star-rating">
+        <div className="star-rating flex space-x-1" onClick={(e) => e.stopPropagation()}>
             {[...Array(5)].map((star, index) => {
                 const ratingValue = index + 1;
                 return (

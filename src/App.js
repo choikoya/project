@@ -1,28 +1,52 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import React from 'react';
+import './style.css';
+import React, { useState } from 'react';
+
 import Header from './header';
 import Footer from './footer';
-import Login from './logIn';
 import SignUp from './signUp';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import Home from './home'; 
+import Login from './logIn';
+
+import Home from './home';
+import About from './about';
 import Search from './search';
-import RecipeInfo from './recipeInfo';
-import './style.css';
+// import Board from './board';
+import MapLocation from './map';
+import MyPage from './myPage';
+
 
 
 function App() {
+  const [favorites, setFavorites] =useState([]);
+
+  const handleFavorite = (item) => {
+    setFavorites((prevFavorites) => {
+      const isFavorite = prevFavorites.some((fav) => fav.RCP_NM === item.RCP_NM);
+      if (isFavorite) {
+        return prevFavorites.filter((fav) => fav.RCP_NM !== item.RCP_NM);
+      } else {
+        return [...prevFavorites, item];
+      }
+    });
+  };
+
+
   return (
     <BrowserRouter>
       <div className="App">
 
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/recipeInfo" element={<RecipeInfo />} />
+
+          <Route path="/" element={<Home />} />
+<Route path="/about" element={<About />} />
+          <Route path="/search" element={<Search onFavoite={handleFavorite} />} />
+          {/* <Route path="/board" element={<Board />} /> */}
+          <Route path="/map" element={<MapLocation />} />
+          <Route path="/mypage" element={<MyPage favorites={favorites} />} />
         </Routes>
         <Footer />
 

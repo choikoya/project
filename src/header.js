@@ -92,11 +92,11 @@ function Header() {
           <nav
             className="w-full bg-white md:bg-transparent rounded shadow-lg px-6 py-4 mt-4 text-center md:p-0 md:mt-0 md:shadow-none">
             <ul className="md:flex items-center">
-              <li><a className="py-2 inline-block md:text-white md:hidden lg:block font-semibold" href="#">About Us</a></li>
+              <li className="py-2"><Link className="inline-block md:text-white md:hidden lg:block font-semibold" to="/about">About Us</Link></li>
               <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/search">레시피 검색</Link></li>
-              <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/board">자료공유</Link></li>
-              <li className="md:ml-4 md:hidden lg:block"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/blog">Blog</Link></li>
+              <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/board">게시판</Link></li>
               <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/map">맛집지도</Link></li>
+              <li className="md:ml-4 md:hidden lg:block"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/myPage">My Page</Link></li>
               <li className="md:ml-6 mt-3 md:mt-0">
                 <Link className="inline-block font-semibold px-4 py-2 text-white bg-blue-600 md:bg-transparent md:text-white border border-white rounded"
                   to="/signUp">회원가입</Link>

@@ -7,6 +7,8 @@ import './modal.css'; // 모달 스타일을 위한 CSS 파일
 const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
     if (!isOpen) return null;
 
+    console.log(info);
+
     return (
         <div className="modal-overlay">
             <div className="modal-content">
@@ -38,7 +40,18 @@ const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
                 <hr className="divider" />
                         <div className="modal-method">
                             <h3>조리 방법</h3>
-                            <p>{info.MANUAL01 }</p>
+                            <p>{info.MANUAL }</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            <p>asdfasd</p>
+                            
+
                         </div>
             </div>
         </div>

@@ -3,19 +3,12 @@
 //SearchCard를 클릭했을 때 onClick 이벤트 핸들러를 호출하여 선택된 아이템을 Search 컴포넌트로 전달
 import StarRating from './starRating';
 
-export default function SearchCard({ imgUrl, title, content, onClick, onFavorite}) {
+export default function SearchCard({ imgUrl, title, content, onClick}) {
     
 
     const handleRating = (ratingValue) => {
         console.log(`Rated: ${ratingValue} stars`);
         // 필요한 경우, 여기에 별점 데이터를 서버에 보내거나 상태에 저장하는 로직을 추가할 수 있습니다.
-    };
-
-    const handleCardClick = (event) => {
-        // Ensure that the click event does not trigger if the click is on the buttons or star rating
-        if (event.target.closest('.search-card-content')) {
-            onClick();
-        }
     };
 
     return (
@@ -34,19 +27,13 @@ export default function SearchCard({ imgUrl, title, content, onClick, onFavorite
                 
                  {/* Favorite button and Star rating form in a row */}
                  <div className="mt-4 flex justify-between items-center">
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                     onClick={(e) => {
-                        e.stopPropagation();
-                        onFavorite();
-                    }} >
-                        Favorite
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        즐겨찾기
                     </button>
 
                     
                     {/* Star Rating Component */}
-                    <StarRating 
-                    onRating={handleRating}
-                    onClick={(e)=>e.stopPropagation()}/>
+                    <StarRating onRating={handleRating} />
             </div>
             </div>
         </div>

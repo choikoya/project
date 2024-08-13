@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import './search.css';
 import SearchCard from './searchCard';
 import Modal from './modal';
+import Mypage from './myPage';
 
 
 
@@ -18,6 +19,7 @@ const Search = () => {
     const resultsPerPage = 9; // 페이지당 표시할 결과 수
     const [totalCount, setTotalCount] = useState('');
     const [selectedItem, setseletedItem] = useState(null);
+    const [favorites, setFavorites] = useState([]); //즐겨찾기 상태 추가
 
     const handleSearch = async () => {
         //아무것도 입력안했을때 이렇게 키워드 입력하라는 경고메세지를 띄울건지, 전체 목록이 나오게 할건지 의논
@@ -39,7 +41,7 @@ const Search = () => {
                 ATT_FILE_NO_MAIN: item.ATT_FILE_NO_MAIN, //이미지 URL
                 RCP_NM: item.RCP_NM, //레시피 이름
                 RCP_PARTS_DTLS: item.RCP_PARTS_DTLS, //재료 정보
-                RCP_WAY2: item.MANUAL01, //조리 방법
+                RCP_WAY2: item.MANUAL, //조리 방법
                 INFO_WGT: item.INFO_WGT, //중량
                 INFO_ENG: item.INFO_ENG, //열량
                 INFO_CAR: item.INFO_CAR, //탄수화물
@@ -84,7 +86,21 @@ const Search = () => {
     const handleCardClick = (item) => {
         setseletedItem(item);
 
-    }
+    };
+
+    const handleFavorite = (item) => {
+        setFavorites(prevFavorites =>{
+              // 이미 즐겨찾기 목록에 있는지 확인
+            const isFavorite = prevFavorites.some(favorite => favorite.RCP_NM === item.RCP_NM);
+            if (isFavorite) {
+                // 이미 즐겨찾기 목록에 있는 경우 필터링
+                return prevFavorites.filter(favorite => favorite.RCP_NM !== item.RCP_NM);
+            } else {
+                // 즐겨찾기 목록에 추가
+                return [...prevFavorites, item];
+            }
+        });
+    };
     
 
     useEffect(() => {
@@ -132,6 +148,7 @@ const Search = () => {
                             title={item.RCP_NM} //레시피 이름
                             content={item.RCP_PARTS_DTLS} //재료
                             onClick={()=>handleCardClick(item)}
+                            onFavorite={() => handleFavorite(item)} // 즐겨찾기 핸들러 전달
                         />
 
                     ))}
@@ -169,13 +186,14 @@ const Search = () => {
                     title={selectedItem.RCP_NM}
                     content={selectedItem.RCP_PARTS_DTLS}
                     info={{
-                        RCP_WAY2: selectedItem.MANUAL01,
+                        
                         INFO_WGT: selectedItem.INFO_WGT,
                         INFO_ENG: selectedItem.INFO_ENG,
                         INFO_CAR: selectedItem.INFO_CAR,
                         INFO_PRO: selectedItem.INFO_PRO,
                         INFO_FAT: selectedItem.INFO_FAT,
-                        INFO_NA: selectedItem.INFO_NA
+                        INFO_NA: selectedItem.INFO_NA,
+                        RCP_WAY2: selectedItem.MANUAL
                     }}
                 />
             )}
