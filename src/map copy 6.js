@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import './map.css';
 
 export default function KakaoMap() {
@@ -6,9 +6,7 @@ export default function KakaoMap() {
   const [searchTerm, setSearchTerm] = useState("");
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState([]);
-//  const [activeOverlay, setActiveOverlay] = useState(null); //현재 활성화된 오버레이
-  const activeOverlayRef = useRef(null); // 현재 활성화된 오버레이를 관리할 ref
-  const [activeMarker, setActiveMarker] = useState(null); // 현재 활성화된 마커를 관리하는 상태
+  const [activeOverlay, setActiveOverlay] = useState(null); //현재 활성화된 오버레이
 
   //페이지네이션 상태
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,9 +55,9 @@ export default function KakaoMap() {
 
           // 지도 클릭 시 CustomOverlay 숨기기
           window.kakao.maps.event.addListener(newMap, 'click', () => {
-            if (activeOverlayRef.current) {
-              activeOverlayRef.current.setMap(null);
-              activeOverlayRef.current = null;
+            if (activeOverlay) {
+              activeOverlay.setMap(null);
+              setActiveOverlay(null);
             }
           });
         });
@@ -75,7 +73,7 @@ export default function KakaoMap() {
     return () => {
       document.head.removeChild(script);
     };
-  }, []);
+  }, [activeOverlay]);
 
   useEffect(() => {
     if (!map) return;
@@ -111,15 +109,16 @@ export default function KakaoMap() {
 
       // 마커 클릭 시 CustomOverlay 표시
       window.kakao.maps.event.addListener(marker, 'click', () => {
-        if  (activeOverlayRef.current) {
-          // 현재 활성화된 오버레이가 있다면 제거
-          activeOverlayRef.current.setMap(null);
-      }
-      // 새로운 오버레이를 지도에 표시
-      customOverlay.setMap(map);
+        if (activeOverlay === customOverlay) {
+          // 이미 클릭된 마커에 대해 작업하지 않음
+          return;
+        }
+        if (activeOverlay) {
+          activeOverlay.setMap(null);// 기존 오버레이를 지도에서 제거
+        }
         
         customOverlay.setMap(map);// 클릭한 마커에 대한 새로운 오버레이를 지도에 표시
-        activeOverlayRef.current = customOverlay;// 현재 활성화된 오버레이를 업데이트
+         setActiveOverlay(customOverlay);// 현재 활성화된 오버레이를 업데이트
       });
 
 
@@ -139,7 +138,7 @@ export default function KakaoMap() {
     // if (newMarkers.length > 0 && !activeOverlay) {
     //   map.setCenter(new window.kakao.maps.LatLng(searchResults[0].lat, searchResults[0].lng));
     // }
-    }, [searchResults, map]);
+    }, [searchResults, map, activeOverlay]);
 
 
     const handleSearch = async (e) => {
@@ -187,28 +186,6 @@ export default function KakaoMap() {
     };
 
 
-  // 검색 결과 클릭 시 마커로 이동하는 핸들러
-  const handleResultClick = (marker) => {
-    if (!map || !marker) return;
-
-    // 마커의 위치로 지도 중심 이동
-    map.setCenter(marker.getPosition());
-
-    // 활성화된 마커 상태 업데이트
-    setActiveMarker(marker);
-
-    // 지도에서 이전 활성화된 마커가 있으면 기본 이미지로 변경
-    if (activeMarker && activeMarker !== marker) {
-      activeMarker.setImage(new window.kakao.maps.MarkerImage(
-        'https://example.com/default-marker.png', // 기본 마커 이미지 URL
-        new window.kakao.maps.Size(24, 35) // 기본 마커 사이즈
-      ));
-    }
-  };
-
-
-
-
     // 현재 페이지에 표시할 검색 결과 계산
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -243,11 +220,7 @@ export default function KakaoMap() {
               </form>
               <ul className="search-results">
                 {currentResults.map(result => (
-                  <li 
-                  key={result.id} 
-                  className="search-result-item"
-                  onClick={() => handleResultClick(markers[result.id])}
-                  >
+                  <li key={result.id} className="search-result-item">
                     <div className="result-name">{result.name}</div>
                     <div className="result-address">위치 : {result.add}</div>
                     <div className="result-tel">전화번호 : {result.tel}</div>

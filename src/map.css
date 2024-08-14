@@ -1,0 +1,160 @@
+/* 전체 페이지를 위한 그리드 레이아웃 */
+
+h2{margin-top: 150px;}
+
+.page-container {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* 왼쪽 열은 1fr, 오른쪽 열은 2fr로 비율 설정 */
+    gap: 16px; /* 열 사이의 간격 */
+    
+    height: calc(100vh - 70px); /*전체 높이에서 상단 메뉴 바의 높이 제외*/
+    padding: 16px; /* 페이지 내 여백 */
+    box-sizing: border-box;
+    margin-bottom: 100px;
+    
+    
+  }
+  
+  /* 검색 바 및 결과 목록 컨테이너 */
+  .search-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 100%; /* 부모 컨테이너의 높이에 맞춤 */
+    /* overflow-y: auto; 컨텐츠가 많을 경우 스크롤 가능하게 설정 */
+  }
+  
+  /* 검색 바 스타일 */
+  .search-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .search-bar input[type="text"] {
+    flex:1;
+    /* width: 100%; */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-bar button {
+    width: 60px;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* 검색 결과 목록 스타일 */
+  .search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* 검색 결과가 컨테이너 전체를 채우도록 설정 */
+    overflow-y: hidden; /* 스크롤 숨기기 */
+  }
+  
+  .search-results li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .search-results li:last-child {
+    border-bottom: none;
+  }
+  
+  /* 지도를 포함하는 컨테이너 */
+  .map-container {
+    position: relative;
+    width: 100%;
+    
+    height: 900px; /* 부모 컨테이너의 높이에 맞춤 */
+  }
+  
+  /* 지도의 스타일 */
+  #map {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px; /* 지도 모서리 둥글게 만들기 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  }
+  
+
+  /* 검색 결과 항목 스타일 */
+.search-result-item {
+    margin-bottom: 16px;
+  }
+  
+  .result-name {
+    font-size: 1.2em; /* 크기 크게 */
+    font-weight: bold; /* 굵게 */
+    margin-bottom: 4px; /* 아래 여백 */
+  }
+  
+  .result-address,
+  .result-tel {
+    font-size: 1em; /* 기본 크기 */
+    color: #555; /* 글씨 색상 (선택 사항) */
+    margin-bottom: 4px; /* 아래 여백 */
+  }
+  
+  /* 페이지네이션 버튼 스타일 */
+.pagination {
+    display: flex;
+    gap: 8px; /* 버튼 사이 간격 */
+    margin-top: 16px; /* 위쪽 여백 */
+    justify-content: center; /* 중앙 정렬 */
+  }
+  
+  .pagination button {
+    border: 1px solid #ccc; /* 버튼의 테두리 색상 */
+    background-color: transparent; /* 배경 색상 없음 */
+    color: #007bff; /* 글자 색상 */
+    padding: 6px 12px; /* 버튼의 여백 */
+    border-radius: 4px; /* 버튼 모서리 둥글게 */
+    cursor: pointer; /* 커서 모양 */
+    font-size: 0.9em; /* 글자 크기 */
+    min-width: 30px; /* 버튼의 최소 너비 설정 */
+    text-align: center; /* 글자 중앙 정렬 */
+    transition: background-color 0.3s, color 0.3s; 
+  }
+ /* 부드러운 전환 효과 */
+  
+
+ /* 커스텀 오버레이 스타일 */
+.custom-overlay {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .overlay-header {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .overlay-address,
+  .overlay-tel {
+    margin-bottom: 5px;
+  }
+
+ /* 검색 결과 항목을 클릭 가능한 영역으로 만듭니다
+.search-result-item {
+    cursor: pointer; }
+    /* 클릭 가능한 영역에 커서 모양을 변경 */
+   
+  
+  
+
+  

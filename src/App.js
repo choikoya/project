@@ -12,7 +12,7 @@ import Home from './home';
 import About from './about';
 import Search from './search';
 // import Board from './board';
-import MapLocation from './map';
+import KakaoMap from './map';
 import MyPage from './myPage';
 
 
@@ -45,7 +45,7 @@ function App() {
 <Route path="/about" element={<About />} />
           <Route path="/search" element={<Search onFavoite={handleFavorite} />} />
           {/* <Route path="/board" element={<Board />} /> */}
-          <Route path="/map" element={<MapLocation />} />
+          <Route path="/map" element={<KakaoMap />} />
           <Route path="/mypage" element={<MyPage favorites={favorites} />} />
         </Routes>
         <Footer />
