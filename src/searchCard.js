@@ -1,9 +1,9 @@
 
 //각각의 이미지와 그에 관련된 정보를 시각적으로 보기 좋게 표시하는 역할(카드 레이아웃 렌더링)
 //SearchCard를 클릭했을 때 onClick 이벤트 핸들러를 호출하여 선택된 아이템을 Search 컴포넌트로 전달
-import StarRating from './starRating';
+import AverageStarRating from "./averageStarRating";
 
-export default function SearchCard({ imgUrl, title, content, onClick, onFavorite}) {
+export default function SearchCard({ imgUrl, title, content, averageRating, onClick, onFavorite}) {
     
 
     const handleRating = (ratingValue) => {
@@ -43,10 +43,8 @@ export default function SearchCard({ imgUrl, title, content, onClick, onFavorite
                     </button>
 
                     
-                    {/* Star Rating Component */}
-                    <StarRating 
-                    onRating={handleRating}
-                    onClick={(e)=>e.stopPropagation()}/>
+                     {/* Average Star Rating Component */}
+                     <AverageStarRating averageRating={averageRating} />
             </div>
             </div>
         </div>

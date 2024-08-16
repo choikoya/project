@@ -104,3 +104,17 @@
     border-top: 1px solid #ddd;
     margin: 20px 0;
 }
+
+.modal-rating {
+    text-align: center; /* 가운데 정렬을 위한 기본 텍스트 정렬 */
+}
+
+.starRating {
+    display: flex;
+    justify-content: center; /* 아이콘을 수평 중앙에 정렬 */
+    align-items: center; /* 아이콘을 수직 중앙에 정렬 */
+}
+
+.star-rating {
+    display: flex;
+}

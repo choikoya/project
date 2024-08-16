@@ -5,3 +5,9 @@
     flex-direction: row;
     gap: 4px; /* 별 사이의 간격 조정 */
 }
+
+.average-rating {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}

@@ -2,24 +2,22 @@ import { useState } from 'react';
 import './signUp.css';
 
 function SignUp() {
-    const [id, setId] = useState('');
+    const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [idError, setIdError] = useState('');
+    const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [generalError, setGeneralError] = useState('');
-    const [idChecked, setIdChecked] = useState(false);
+    const [emailChecked, setEmailChecked] = useState(false);
 
-
-
-    // ID 유효성 검사 (예시로 ID는 최소 5자, 최대 15자 길이만 허용)
-    const idRegex = /^[a-zA-Z0-9._-]{5,15}$/;
+    // 이메일과 비밀번호의 유효성을 검사하는 정규 표현식
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9]{2,}$/;
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
 
-    // ID 유효성 검사
-    const validateId = (id) => {
-        return idRegex.test(id);
+    // 이메일 유효성 검사
+    const validateEmail = (email) => {
+        return emailRegex.test(email);
     };
 
     // 비밀번호 유효성 검사
@@ -27,63 +25,56 @@ function SignUp() {
         return passwordRegex.test(password);
     };
 
-    // ID 중복 확인 (모의 API 호출)
-    const checkIdExists = async (id) => {
+    // 이메일 중복 확인 (모의 API 호출)
+    const checkEmailExists = async (email) => {
         // 실제 API 호출로 변경해야 합니다.
-        const response = await fetch(`http://192.168.0.130:8080/register/check-username?username=${id}`)
-        const data = await response.json();  
-        return data; 
-        
-
+        const mockExistingEmails = ['test@example.com', 'user@example.com'];
+        return mockExistingEmails.includes(email);
     };
 
-    // ID 입력 처리
-    const handleIdChange = async (e) => {
-        e.preventDefault();
-        const newId = e.target.value;
-        setId(newId);
-        if (idChecked) {
-            if (!validateId(newId)) {
-                setIdError('유효하지 않은 ID입니다.');
+    // 이메일 입력 처리
+    const handleEmailChange = async (e) => {
+        const newEmail = e.target.value;
+        setEmail(newEmail);
+        if (emailChecked) {
+            if (!validateEmail(newEmail)) {
+                setEmailError('유효하지 않은 이메일 주소입니다.');
             } else {
-                // ID 유효성 검사 통과 후 중복 확인
-                const exists = await checkIdExists(newId);
+                // 이메일 유효성 검사 통과 후 중복 확인
+                const exists = await checkEmailExists(newEmail);
                 if (exists) {
-                    setIdError('ID가 이미 사용 중입니다.');
+                    setEmailError('이메일이 이미 사용 중입니다.');
                 } else {
-                    setIdError('');
-
-                   
-
+                    setEmailError('');
                 }
             }
         }
     };
 
-    // ID 중복 확인 버튼 클릭 처리
-    const checkId = async () => {
-        if (validateId(id)) {
-            const exists = await checkIdExists(id);
+    // 이메일 중복 확인 버튼 클릭 처리
+    const checkEmail = async () => {
+        if (validateEmail(email)) {
+            const exists = await checkEmailExists(email);
             if (exists) {
-                setIdError('ID가 이미 사용 중입니다.');
+                setEmailError('이메일이 이미 사용 중입니다.');
             } else {
-                alert("사용가능");
-                setIdChecked(true);
+                setEmailError('');
+                setEmailChecked(true);
             }
         } else {
-            setIdError('유효하지 않은 ID입니다.');
+            setEmailError('유효하지 않은 이메일 주소입니다.');
         }
     };
 
     // 폼 제출 처리
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        if (!id || !name || !password || !confirmPassword) {
+        if (!email || !name || !password || !confirmPassword) {
             setGeneralError('모든 필드를 입력해 주세요.');
             return;
         }
-        if (!validateId(id)) {
-            setIdError('유효하지 않은 ID입니다.');
+        if (!validateEmail(email)) {
+            setEmailError('유효하지 않은 이메일 주소입니다.');
             return;
         }
         if (!validatePassword(password)) {
@@ -94,42 +85,20 @@ function SignUp() {
             setPasswordError('비밀번호가 일치하지 않습니다.');
             return;
         }
-
-        setPasswordError('');
-
-        try {
-            const formData = new FormData();
-            formData.append('username', id);
-            formData.append('password', password);
-            formData.append('alias', name);
-
-            const response = await fetch('http://192.168.0.130:8080/register', {
-                method: 'POST',
-                
-                body: formData,
-            });
-            alert("가입완료");
-            window.location.href = '/login';
-
-           
-        } catch (error) {
-            setGeneralError("오류 발생");
-        }
-        setGeneralError('');
-
-        
+        // 회원가입 로직을 여기에 추가
+        console.log('회원가입:', { email, name, password });
     };
 
     // 폼 취소 처리
     const handleCancel = () => {
-        setId('');
+        setEmail('');
         setName('');
         setPassword('');
         setConfirmPassword('');
-        setIdError('');
+        setEmailError('');
         setPasswordError('');
         setGeneralError('');
-        setIdChecked(false);
+        setEmailChecked(false);
     };
 
     return (
@@ -138,19 +107,19 @@ function SignUp() {
                 <h2>회원가입 (Sign Up)</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="id">ID</label>
+                        <label htmlFor="email">이메일 (Email)</label>
                         <input
-                            type="text"
-                            id="id"
-                            placeholder="ID를 입력해 주세요 (5~15자, 영문/숫자/특수문자 가능)"
-                            value={id}
-                            onChange={handleIdChange}
+                            type="email"
+                            id="email"
+                            placeholder="이메일을 입력해 주세요 (e.g., example@domain.com)"
+                            value={email}
+                            onChange={handleEmailChange}
                             required
                         />
-                        <button type="button" onClick={checkId} className="check-id-btn">
-                            ID 확인 (Check ID)
+                        <button type="button" onClick={checkEmail} className="check-email-btn">
+                            이메일 확인 (Check Email)
                         </button>
-                        {idError && <p className="error-message">{idError}</p>}
+                        {emailError && <p className="error-message">{emailError}</p>}
                     </div>
                     <div className="form-group">
                         <label htmlFor="name">이름 (Name)</label>

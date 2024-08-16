@@ -37,31 +37,21 @@ const Search = () => {
             console.log(data);
 
             //API로부터 필요한 데이터 추출
-            const rcpnmResults = data.COOKRCP01.row.map(item => {
-                // 모든 MANUAL 필드를 수집
-                const manuals = [];
-                let manualIndex = 1;
-                while (item[`MANUAL${manualIndex.toString().padStart(2, '0')}`]) {
-                    manuals.push(item[`MANUAL${manualIndex.toString().padStart(2, '0')}`]);
-                    manualIndex++;
-                }
+            const rcpnmResults = data.COOKRCP01.row.map(item => ({
+                ATT_FILE_NO_MAIN: item.ATT_FILE_NO_MAIN, //이미지 URL
+                RCP_NM: item.RCP_NM, //레시피 이름
+                RCP_PARTS_DTLS: item.RCP_PARTS_DTLS, //재료 정보
+                RCP_MANUAL: item.MANUAL01, //조리 방법
+                INFO_WGT: item.INFO_WGT, //중량
+                INFO_ENG: item.INFO_ENG, //열량
+                INFO_CAR: item.INFO_CAR, //탄수화물
+                INFO_PRO: item.INFO_PRO, //단백질
+                INFO_FAT: item.INFO_FAT, //지방
+                INFO_NA: item.INFO_NA //나트륨
 
-                return {
 
-                    ATT_FILE_NO_MAIN: item.ATT_FILE_NO_MAIN, //이미지 URL
-                    RCP_NM: item.RCP_NM, //레시피 이름
-                    RCP_PARTS_DTLS: item.RCP_PARTS_DTLS, //재료 정보
-                    RCP_MANUAL: manuals.join('\n'), //조리 방법
-                    INFO_WGT: item.INFO_WGT, //중량
-                    INFO_ENG: item.INFO_ENG, //열량
-                    INFO_CAR: item.INFO_CAR, //탄수화물
-                    INFO_PRO: item.INFO_PRO, //단백질
-                    INFO_FAT: item.INFO_FAT, //지방
-                    INFO_NA: item.INFO_NA //나트륨
 
-                };
-
-                });
+            }));
             console.log('검색결과', rcpnmResults);
 
             setTotalCount(data.COOKRCP01.total_count); //전체 결과 수 저장
@@ -89,7 +79,7 @@ const Search = () => {
         setCurrentPage(pageNumber * 9);
     };
 
-    const handleCloseModal = () => {
+    const handleCloseModal = ()=>{
         setseletedItem(null);
     };
 
@@ -99,8 +89,8 @@ const Search = () => {
     };
 
     const handleFavorite = (item) => {
-        setFavorites(prevFavorites => {
-            // 이미 즐겨찾기 목록에 있는지 확인
+        setFavorites(prevFavorites =>{
+              // 이미 즐겨찾기 목록에 있는지 확인
             const isFavorite = prevFavorites.some(favorite => favorite.RCP_NM === item.RCP_NM);
             if (isFavorite) {
                 // 이미 즐겨찾기 목록에 있는 경우 필터링
@@ -111,7 +101,7 @@ const Search = () => {
             }
         });
     };
-
+    
 
     useEffect(() => {
         if (results.length === 0) return;
@@ -157,7 +147,7 @@ const Search = () => {
                             imgUrl={item.ATT_FILE_NO_MAIN} //이미지 소
                             title={item.RCP_NM} //레시피 이름
                             content={item.RCP_PARTS_DTLS} //재료
-                            onClick={() => handleCardClick(item)}
+                            onClick={()=>handleCardClick(item)}
                             onFavorite={() => handleFavorite(item)} // 즐겨찾기 핸들러 전달
                         />
 
@@ -196,7 +186,7 @@ const Search = () => {
                     title={selectedItem.RCP_NM}
                     content={selectedItem.RCP_PARTS_DTLS}
                     info={{
-
+                        
                         INFO_WGT: selectedItem.INFO_WGT,
                         INFO_ENG: selectedItem.INFO_ENG,
                         INFO_CAR: selectedItem.INFO_CAR,
