@@ -9,54 +9,59 @@ import StarRating from './starRating';
 const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
     
     const [rating, setRatings] = useState(0);
-  
+    const [averageRating, setAverageRating] = useState(0);
+    
+    useEffect(() => {
+        if (isOpen) {
+            // 서버에서 평균 별점 가져오기
+            const fetchAverageRating = async () => {
+                try {
+                    const response = await fetch('/api/ratings/average', { // 평균 별점을 가져오는 API 엔드포인트
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+                    const data = await response.json();
+                    setAverageRating(data.averageRating); // 평균 별점 업데이트
+                } catch (error) {
+                    console.error('Error fetching average rating:', error);
+                }
+            };
+
+            fetchAverageRating();
+        }
+    }, [isOpen]);
 
    
 
     // 별점 업데이트 핸들러
     const handleRating = async(ratingValue) => {
-        console.log(ratingValue);
         
         setRatings(ratingValue); // UI에서 별점 업데이트
 
     
          // Send the rating to the backend
          try {
-            const token = sessionStorage.getItem('token'); // 'authToken'은 세션 스토리지에 저장된 토큰의 키입니다.
-
-            if (!token) {
-                console.error('No auth token found'); // **토큰이 없을 때 로그 추가**
-                return;
-                
-            }
-
-            console.log(token);
-            
-           const response =  await fetch('http://192.168.0.130:8080/api/foodRating', {
+            await fetch('http://192.168.0.130:8080/api/foodRatings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', 
-                    'Authorization': `${token}`, // 토큰을 Authorization 헤더에 추가합니다.
                 },
                 body: JSON.stringify({
                     food_name:title, // 또는 다른 식별자
                     rating:ratingValue, // 사용자로부터 받은 별점
-                   
-                    
                 }),
-
-                
             });
-
-            console.log(response);
-            if (!response.ok) {
-                throw new Error(`Failed to submit rating: ${response.status} ${response.statusText}`);
-            }
-            
-           
-
-
-        
+         // 별점 등록 후 평균 별점을 다시 가져와서 업데이트
+         const response = await fetch('/api/ratings/average', { // 평균 별점을 가져오는 API 엔드포인트
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        setAverageRating(data.averageRating); // 평균 별점 업데이트
     } catch (error) {
         console.error('Error sending rating to backend:', error);
     }

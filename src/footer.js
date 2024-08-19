@@ -126,7 +126,7 @@ function Footer(){
                         </li>
                     </ul>
 
-                    <p className="text-sm text-gray-400 mt-12">© 2018 ProDentists. <br className="hidden lg:block" /> All Rights Reserved.</p>
+                    <p className="text-sm text-gray-400 mt-12">© 2024 RecipeQuest <br className="hidden lg:block" /> All Rights Reserved.</p>
                 </div>
             </div>
         </footer>

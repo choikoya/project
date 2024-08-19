@@ -1,0 +1,57 @@
+.board-container {
+  width: 80%;
+  margin: 150px auto 150px; /* 상단에 100px 여백 추가 */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.board-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.board-actions {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.board-button {
+  padding: 8px 16px;
+  border: none;
+  background-color: rgb(78, 212, 206);
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.board-button:hover {
+  background-color: #0056b3;
+}
+
+.board-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.board-th, .board-td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+}
+
+.board-th {
+  background-color: #ffffff;
+  color: #333;
+  
+}
+
+.board-tr:nth-child(even) {
+  background-color: #f2f2f2;
+}

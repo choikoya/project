@@ -1,0 +1,47 @@
+/* searchCard.css */
+
+/* 카드 컨테이너 스타일 */
+.search-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+/* 카드 내 액션 버튼을 가운데 정렬 */
+.search-card .action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 중앙 정렬 */
+    width: 100%; /* 전체 너비를 차지 */
+}
+
+/* 버튼 가운데 정렬 */
+.search-card .action-buttons .bg-green-500 {
+    margin-top: 16px; /* 버튼 간의 간격 */
+}
+
+/* 카드 이미지 */
+.search-card img {
+    width: 100%;
+    height: auto; /* 비율 유지 */
+}
+
+/* 버튼 스타일 */
+.search-card .bg-blue-500,
+.search-card .bg-green-500 {
+    background-color: #3498db; /* 기본 배경색 */
+}
+
+.search-card .bg-blue-500:hover {
+    background-color: #2980b9; /* hover 상태 배경색 */
+}
+
+.search-card .bg-green-500 {
+    background-color: #2ecc71; /* 기본 배경색 */
+}
+
+.search-card .bg-green-500:hover {
+    background-color: #27ae60; /* hover 상태 배경색 */
+}

@@ -9,7 +9,34 @@ import StarRating from './starRating';
 const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
     
     const [rating, setRatings] = useState(0);
-  
+    const [averageRating, setAverageRating] = useState(0);
+    
+    useEffect(() => {
+        if (isOpen) {
+            // 서버에서 평균 별점 가져오기
+            const fetchAverageRating = async () => {
+                try {
+                    const response = await fetch(`http://192.168.0.130:8080/api/foodRating/average?foodName=${title}`, { // 평균 별점을 가져오는 API 엔드포인트
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch average rating: ' + response.statusText); // **추가된 부분**
+                    }
+
+                    const data = await response.json();
+                    setAverageRating(data.averageRating); // 평균 별점 업데이트
+                } catch (error) {
+                    console.error('Error fetching average rating:', error);
+                }
+            };
+
+            fetchAverageRating();
+        }
+    }, [isOpen, title]);
 
    
 
@@ -56,7 +83,20 @@ const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
            
 
 
-        
+         // 별점 등록 후 평균 별점을 다시 가져와서 업데이트
+         const averageResponse = await fetch('/api/ratings/average', { // 평균 별점을 가져오는 API 엔드포인트
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!averageResponse.ok) {
+            throw new Error(`Failed to fetch average rating after submission: ${averageResponse.status} ${averageResponse.statusText}`);
+        }
+
+        const averageData = await averageResponse.json();
+        setAverageRating(averageData.averageRating); // 평균 별점 업데이트
     } catch (error) {
         console.error('Error sending rating to backend:', error);
     }

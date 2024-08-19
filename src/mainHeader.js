@@ -1,14 +1,12 @@
 //HTML 헤더 부분을 리액트 컴포넌트로 변환
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './header.css'; // 헤더 스타일이 필요할 경우
 
 
-
-export function Header() {
- 
+export function MainHeader() {
   return (
-    <header className=" absolute top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64">
+    <header className="absolute top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64">
       <div className="hidden md:flex justify-between items-center py-2 border-b text-sm py-3"
         style={{ borderColor: 'rgba(255, 255, 255, 0.25)' }}>
         <div>
@@ -122,3 +120,5 @@ export function Header() {
     </header>
   );
 }
+
+

@@ -38,15 +38,18 @@ function Login() {
 
     try {
       //백엔드 호출 시작
-      const formData = new FormData();
-      formData.append('username', username);
-      formData.append('password', password);
-
+      
       const response = await fetch('http://192.168.0.130:8080/login', {
         method: 'POST',
-        body: formData,// 요청 본문에 id와 password를 JSON 형식으로 전달
+        headers: {
+          'Content-Type': 'application/json',
+        },
+       
+          body: JSON.stringify({ username, password })
+        // 요청 본문에 id와 password를 JSON 형식으로 전달
       });
 
+      console.log(response);
       if (!response.ok) {
         // 응답이 OK가 아닌 경우 오류 처리
         const errorData = await response.json();
@@ -57,9 +60,10 @@ function Login() {
       }
 
 
-      const data = await response.json();
-      console.log(data);
-      const token = data.token;
+      const token = response.headers.get('Authorization'); 
+      // const data =  response.json();
+      // console.log(data, 'aaa');
+      // const token = data.token;
 
       // if (response.ok) {
       //   const token = data.token;

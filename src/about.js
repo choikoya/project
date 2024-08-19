@@ -11,7 +11,7 @@ function About() {
             Donec efficitur ullamcorper metus, eu venenatis nunc. Nam eget neque tempus, mollis sem a, faucibus mi.</p>
         </div>
 
-        <div className="w-full lg:w-1/2 lg:px-8 mt-12 lg:mt-0">
+        <div className="w-full lg:w-1/2 lg:px-8 mt-2 lg:mt-0">
           <div className="md:flex">
             <div>
               <div className="w-16 h-16 bg-blue-600 rounded-full"></div>
