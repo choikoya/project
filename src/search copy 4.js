@@ -53,7 +53,7 @@ const Search = ({onSelectItem}) => {
             console.log(data);
 
             //API로부터 필요한 데이터 추출
-            const rcpnmResults = data.COOKRCP01.row.map(item => {
+            const rcpnmResults = data.COOKRCP01.row.map(async(item) => {
                 // 모든 MANUAL 필드를 수집
                 const manuals = [];
                 let manualIndex = 1;
@@ -62,7 +62,11 @@ const Search = ({onSelectItem}) => {
                     manualIndex++;
                 }
 
-                
+                // 각 레시피에 대한 평균 별점 가져오기
+            const avgResponse = await fetch(`http://192.168.0.130:8080/api/getAverageRating?recipeName=${item.RCP_NM}`);
+            const avgData = await avgResponse.json();
+            const averageRating = avgData.averageRating || 0;
+
                 return {
 
                     ATT_FILE_NO_MAIN: item.ATT_FILE_NO_MAIN, //이미지 URL
@@ -75,7 +79,7 @@ const Search = ({onSelectItem}) => {
                     INFO_PRO: item.INFO_PRO, //단백질
                     INFO_FAT: item.INFO_FAT, //지방
                     INFO_NA: item.INFO_NA, //나트륨
-                    averageStarRating: ratingMap[item.RCP_NM] || 0 // 평균 별점 설정
+                    averageStarRating: averageRating // 평균 별점 설정
 
                 };
 
@@ -231,7 +235,6 @@ const Search = ({onSelectItem}) => {
                             averageRating={item.averageRating} // 평균 별점 전달
                             onClick={() => handleCardClick(item)}
                             onFavorite={() => handleFavorite(item)} // 즐겨찾기 핸들러 전달
-                            cal={item.INFO_ENG}
                             
                         />
 
@@ -269,7 +272,6 @@ const Search = ({onSelectItem}) => {
                     imgUrl={selectedItem.ATT_FILE_NO_MAIN}
                     title={selectedItem.RCP_NM}
                     content={selectedItem.RCP_PARTS_DTLS}
-                    
                     info={{
 
                         INFO_WGT: selectedItem.INFO_WGT,

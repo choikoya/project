@@ -1,11 +1,44 @@
 //HTML 헤더 부분을 리액트 컴포넌트로 변환
-
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './header.css'; // 헤더 스타일이 필요할 경우
 
-
-
 export function Header() {
+// 로그인 상태를 관리할 상태 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ // 로그아웃 함수
+const handleLogout=()=>{
+  sessionStorage.removeItem('token');
+  setIsLoggedIn(false);
+  window.location.href = '/login';
+}
+
+useEffect(()=>{
+  const token = sessionStorage.getItem('token');
+  if(token){
+    setIsLoggedIn(true);
+  }
+},[]);
+
+// useEffect(()=>{
+//   handleLogout();
+// },[])
+
+
+//    // 로그인 상태를 관리할 상태 변수
+//    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+//    // 로그인/로그아웃 버튼 클릭 핸들러
+//    const handleAuthClick = () => {
+//      if (isLoggedIn) {
+//        // 로그아웃 처리
+//        setIsLoggedIn(false);
+//        // 로그아웃 API 호출 또는 로직 추가
+//      } else {
+//        // 로그인 페이지로 리다이렉트
+//        window.location.href = '/login';
+//      }
+//    };
  
   return (
     <header className=" absolute top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64">
@@ -33,13 +66,28 @@ export function Header() {
         <div>
           <ul className="flex justify-end text-white">
             <li>
-              <a href="#" target="_blank" title="">
+              {isLoggedIn ? (
+                <button
+                className="py-2 inline-block md:text-white md:px-2 font-semibold"
+                onClick={handleLogout}
+              >
+                로그아웃
+              </button>
+            ) : (
+              <Link
+                className="py-2 inline-block md:text-white md:px-2 font-semibold"
+                to="/login"
+              >
+                로그인
+              </Link>
+            )}
+              // <a href="#" target="_blank" title="">
                 {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
                   <path
                     d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592	c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20	c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z">
                   </path>
                 </svg> */}
-                <Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/login">로그인</Link>
+                {/* <Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/login">로그인</Link> */}
              
               </a>
             </li>

@@ -2,12 +2,13 @@
 .search-page {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin-top: 100px;
+
     padding: 60px 20px 20px 20px;
+    min-height: 800px; /* 기본 높이를 1000px로 설정 */
   }
   
   .search-container {
-    margin: 20px 0;
+    margin:  0;
   }
   
   input {

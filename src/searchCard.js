@@ -4,8 +4,9 @@
 import AverageStarRating from "./averageStarRating";
 import { FaCalendarCheck } from 'react-icons/fa'; // 체크 모양 아이콘을 위해 react-icons 사용
 import './searchCard.css';
+import { useState } from "react";
 
-export default function SearchCard({ imgUrl, title, content, averageRating, onClick, onFavorite, onCheck}) {
+export default function SearchCard({ imgUrl, title, content, cal, averageRating, onClick, onFavorite, onCheck, onRatingSubmit}) {
     
 
     // const handleRating = (ratingValue) => {
@@ -13,12 +14,56 @@ export default function SearchCard({ imgUrl, title, content, averageRating, onCl
     //     // 필요한 경우, 여기에 별점 데이터를 서버에 보내거나 상태에 저장하는 로직을 추가할 수 있습니다.
     // };
 
-    // const handleCardClick = (event) => {
-    //     // Ensure that the click event does not trigger if the click is on the buttons or star rating
-    //     if (event.target.closest('.search-card-content')) {
-    //         onClick();
-    //     }
-    // };
+    const [rating, setRating] = useState('');
+
+    const handleRatingChange = (event) => {
+        setRating(event.target.value);
+    };
+
+    const handleRatingSubmit = () => {
+        if (rating >= 0 && rating <= 5) {
+            onRatingSubmit(rating);
+            setRating('');
+        }
+    };
+
+    const todayDate = new Date();
+
+    const handleCheckClick = async(event) => {
+        event.stopPropagation();
+        
+            
+            if (onCheck && typeof onCheck === 'function') {
+                // API 호출하여 백엔드에 저장
+                try {
+                    const token = sessionStorage.getItem('token'); // 'authToken'은 세션 스토리지에 저장된 토큰의 키입니다.
+
+                    if (!token) {
+                        console.error('No auth token found'); // **토큰이 없을 때 로그 추가**
+                        return;
+                        
+                    }
+                    const response = await fetch('http://192.168.0.130:8080/meal/dailyMeal', { // 백엔드 API URL
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                             'Authorization': `${token}`
+                        },
+                        body: JSON.stringify({
+                            "food_name":{title}, // 'YYYY-MM-DD' 형식으로 변환
+                            "calorie":{cal}
+                        }),
+                    });
+                    if (!response.ok) {
+                        throw new Error('Failed to save recipe');
+                    }
+                    console.log('레시피 저장 성공');
+                    onCheck(todayDate, { title });
+                } catch (error) {
+                    console.error('Error saving recipe:', error);
+                }
+        }
+    };
 
     return (
         <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 search-card" onClick={onClick}>
@@ -53,10 +98,7 @@ export default function SearchCard({ imgUrl, title, content, averageRating, onCl
 
                     {/* Calendar Check button below the horizontal buttons */}
                     <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded flex items-center"
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onCheck();
-                        }}>
+                        onClick={handleCheckClick}>
                         <FaCalendarCheck className="mr-2" />
                         달력 체크
                     </button>

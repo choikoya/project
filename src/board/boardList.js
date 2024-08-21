@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './boardList.css';
 
 const DataDisplay = () => {
     const [dataBoard, setDataBoard] = useState([]);
@@ -157,7 +158,7 @@ const DataDisplay = () => {
 };
 
 return (
-    <div>
+    <div className='board-container'>
         <h2>Data Display</h2>
         <button onClick={loadBoard}>게시판</button>
 
