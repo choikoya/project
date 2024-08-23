@@ -1,7 +1,24 @@
 
 import './main.css'; // 
+import { useState, useEffect } from 'react';
 
 function Main() {
+  // 로그인 상태를 관리할 상태 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ // 로그아웃 함수
+const handleLogout=()=>{
+  sessionStorage.removeItem('token');
+  setIsLoggedIn(false);
+  window.location.href = '/login';
+}
+
+useEffect(()=>{
+  const token = sessionStorage.getItem('token');
+  if(token){
+    setIsLoggedIn(true);
+  }
+},[]);
+
   return (
     <div className="bg-gray-100">
       <section className="cover bg-blue-teal-gradient relative bg-blue-600 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64 overflow-hidden py-48 flex items-center min-h-screen">

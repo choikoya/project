@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
     const [rating, setRatings] = useState(0);
   
 
-   
+    console.log(title);
 
     // 별점 업데이트 핸들러
     const handleRating = async(ratingValue) => {
@@ -66,11 +66,12 @@ const Modal = ({ isOpen, onClose, imgUrl, title, content, info }) => {
 
     if (!isOpen) return null;
 
-    console.log(info);
+    console.log("rcp",info.RCP_MANUAL);
 
      // RCP_MANUAL 문자열을 줄바꿈으로 분리
      const manualSteps = info.RCP_MANUAL.split('\n').map((step, index) => (
         <li key={index}>{step}</li>
+        
     ));
 
     return (

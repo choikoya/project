@@ -81,7 +81,7 @@ useEffect(()=>{
                 로그인
               </Link>
             )}
-              // <a href="#" target="_blank" title="">
+              <a href="#" target="_blank" title="">
                 {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="fill-current">
                   <path
                     d="M20,3H4C3.447,3,3,3.448,3,4v16c0,0.552,0.447,1,1,1h8.615v-6.96h-2.338v-2.725h2.338v-2c0-2.325,1.42-3.592,3.5-3.592	c0.699-0.002,1.399,0.034,2.095,0.107v2.42h-1.435c-1.128,0-1.348,0.538-1.348,1.325v1.735h2.697l-0.35,2.725h-2.348V21H20	c0.553,0,1-0.448,1-1V4C21,3.448,20.553,3,20,3z">
@@ -139,6 +139,7 @@ useEffect(()=>{
         <div className="w-1/2 md:w-auto">
           <Link to="/" className="text-white font-bold text-2xl">
             RecipeQuest
+           
           </Link>
         </div>
 
@@ -154,7 +155,7 @@ useEffect(()=>{
           <nav
             className="w-full bg-white md:bg-transparent rounded shadow-lg px-6 py-4 mt-4 text-center md:p-0 md:mt-0 md:shadow-none">
             <ul className="md:flex items-center">
-              {/* <li className="py-2"><Link className="inline-block md:text-white md:hidden lg:block font-semibold" to="/about">About Us</Link></li> */}
+              <li className="py-2"><Link className="inline-block md:text-white md:hidden lg:block font-semibold" to="/imgSearch">이미지 검색</Link></li>
               <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/search">레시피 검색</Link></li>
               <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/board">게시판</Link></li>
               <li className="md:ml-4"><Link className="py-2 inline-block md:text-white md:px-2 font-semibold" to="/map">맛집지도</Link></li>

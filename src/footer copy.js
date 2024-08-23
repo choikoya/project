@@ -4,7 +4,7 @@ function Footer(){
             <div className="flex flex-col md:flex-row">
                 <div className="w-full lg:w-2/6 lg:mx-4 lg:pr-8">
                     <h3 className="font-bold text-2xl">RecipeQuest</h3>
-                    <p className="text-gray-400">enjoy recipe.</p>
+                    <p className="text-gray-400">ed diam nonumy.</p>
 
                     <form className="flex items-center mt-6">
                         <div className="w-full">
@@ -28,9 +28,9 @@ function Footer(){
                 <div className="w-full lg:w-1/6 mt-8 lg:mt-0 lg:mx-4">
                     <h5 className="uppercase tracking-wider font-semibold text-gray-500">Treatments</h5>
                     <ul className="mt-4">
-                        <li className="mt-2"><a href="#" title="" className="opacity-75 hover:opacity-100">PNU7</a></li>
-                        <li className="mt-2"><a href="#" title="" className="opacity-75 hover:opacity-100">digital training</a></li>
-                        {/* <li className="mt-2"><a href="#" title="" className="opacity-75 hover:opacity-100">Oral Health</a></li> */}
+                        <li className="mt-2"><a href="#" title="" className="opacity-75 hover:opacity-100">General Dentistry</a></li>
+                        <li className="mt-2"><a href="#" title="" className="opacity-75 hover:opacity-100">Cosmetic Dentistry</a></li>
+                        <li className="mt-2"><a href="#" title="" className="opacity-75 hover:opacity-100">Oral Health</a></li>
                     </ul>
                 </div>
 
@@ -45,7 +45,7 @@ function Footer(){
                                     </svg>
                                 </span>
                                 <span className="ml-3">
-                                부산 금정구 수림로 132 과학기술연구동
+                                    1985 Kerry Way, Whittier, CA, USA
                                 </span>
                             </a>
                         </li>
@@ -58,7 +58,7 @@ function Footer(){
                                     </svg>
                                 </span>
                                 <span className="ml-3">
-                                    Mon - Fri: 9:00 - 18:00<br />
+                                    Mon - Fri: 9:00 - 19:00<br />
                                     Closed on Weekends
                                 </span>
                             </a>
@@ -71,7 +71,7 @@ function Footer(){
                                     </svg>
                                 </span>
                                 <span className="ml-3">
-                                051. 510. 0311
+                                    +1 562-789-1935
                                 </span>
                             </a>
                         </li>
@@ -83,7 +83,7 @@ function Footer(){
                                     </svg>
                                 </span>
                                 <span className="ml-3">
-                                    RecipeQuest@pnu7.com
+                                    dentalpro@example.com
                                 </span>
                             </a>
                         </li>

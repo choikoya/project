@@ -122,11 +122,6 @@ const DataDisplay = () => {
         });
     };
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString(); // 날짜만 포맷 (예: 2024/08/22)
-    };
-
     const loadData = () => {
         return (
             <table className='board-table' align="center">
@@ -147,8 +142,7 @@ const DataDisplay = () => {
                             <td className='board-td'>{board.title}</td>
                             <td className='board-td'>{board.writer}</td>
                             <td className='board-td'>{board.content}</td>
-                            
-<td className='board-td'>{formatDate(board.createDate)}</td>
+                            <td className='board-td'>{board.createDate}</td>
                             <td className='board-td'>
                                 <button className='board-button' onClick={(e) => {
                                     e.stopPropagation();

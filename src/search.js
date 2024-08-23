@@ -61,7 +61,7 @@ const Search = ({onSelectItem}) => {
                     manuals.push(item[`MANUAL${manualIndex.toString().padStart(2, '0')}`]);
                     manualIndex++;
                 }
-
+console.log(manuals);
                 
                 return {
 

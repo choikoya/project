@@ -1,0 +1,32 @@
+.container {
+    max-width: 500px;
+    margin: 250px auto 0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    text-align: center;
+    min-height: 600px;
+  }
+  
+  input[type="file"] {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  .result {
+    margin-top: 20px;
+    font-size: 16px;
+    color: blue;
+  }
+  

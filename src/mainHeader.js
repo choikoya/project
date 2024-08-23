@@ -2,9 +2,25 @@
 
 import { Link } from 'react-router-dom';
 import './header.css'; // 헤더 스타일이 필요할 경우
+import { useEffect, useState } from 'react';
 
 
 export function MainHeader() {
+  // 로그인 상태를 관리할 상태 변수
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ // 로그아웃 함수
+const handleLogout=()=>{
+  sessionStorage.removeItem('token');
+  setIsLoggedIn(false);
+  window.location.href = '/login';
+}
+
+useEffect(()=>{
+  const token = sessionStorage.getItem('token');
+  if(token){
+    setIsLoggedIn(true);
+  }
+},[]);
   return (
     <header className="absolute top-0 left-0 w-full z-50 px-4 sm:px-8 lg:px-16 xl:px-40 2xl:px-64">
       <div className="hidden md:flex justify-between items-center py-2 border-b text-sm py-3"

@@ -3,7 +3,7 @@ import './myPage.css'; // CSS 스타일 파일
 import Calendar from 'react-calendar'; // 설치가 필요할 수 있습니다 (npm install react-calendar)
 import 'react-calendar/dist/Calendar.css'; // CSS 스타일 파일
 import { useNavigate } from 'react-router-dom'; // 회원 탈퇴를 위한 라우터 기능
-import SearchCard from './searchCard';
+
 import Modal from './modal';
 
 const MyPage = () => {
@@ -14,7 +14,6 @@ const MyPage = () => {
     const resultsPerPage = 10; // 페이지당 결과 수
     const navigate = useNavigate(); // 회원 탈퇴 후 리다이렉션을 위한 네비게이션
     const [selectedRecipe, setSelectedRecipe] = useState(null);
-    const [menu, setMenu] = useState([]);
 
 
     useEffect(() => {
@@ -67,7 +66,7 @@ const MyPage = () => {
 
             }
             // 레시피의 상세 정보를 가져옵니다.
-            const response = await fetch(`http://192.168.0.130:8080/api/search?RCP_NM=${recipe}&startIdx=1&endIdx=1`, {// API 엔드포인트는 실제 엔드포인트로 대체해야 함
+            const response = await fetch(`http://192.168.0.130:8080/api/search?RCP_NM=${query}`, {// API 엔드포인트는 실제 엔드포인트로 대체해야 함
                 method: 'GET',
                 headers: {
                 'Content-Type': 'application/json',
@@ -79,27 +78,29 @@ const MyPage = () => {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        
+
         const data = await response.json();
-        console.log("data",data);
-        const manuals = [];
-        let manualIndex = 1;
-        while (data.COOKRCP01.row[0][`MANUAL${manualIndex.toString().padStart(2, '0')}`]) {
-            manuals.push(data.COOKRCP01.row[0][`MANUAL${manualIndex.toString().padStart(2, '0')}`]);
-            manualIndex++;
-
-        }
-        setMenu([...menu, manuals.join('\n')]);
-       
 
 
-        setSelectedRecipe(data);
+        setSelectedRecipe({
+            imgUrl: data.ATT_FILE_NO_MAIN, // 레시피 이미지 URL
+            title: data.RCP_NM, // 레시피 제목
+            content: data.RCP_PARTS_DTLS, // 레시피 내용
+            info: {
+                INFO_WGT: data.INFO_WGT,
+                INFO_ENG: data.INFO_ENG,
+                INFO_CAR: data.INFO_CAR,
+                INFO_PRO: data.INFO_PRO,
+                INFO_FAT: data.INFO_FAT,
+                INFO_NA: data.INFO_NA,
+                RCP_MANUAL: data.RCP_MANUAL
+            }
+        });
     } catch (error) {
         console.error('Error fetching recipe details:', error);
     }
 };
-console.log("menu",menu);
-console.log("selectedRecipe",selectedRecipe);
+
 
 
 useEffect(() => {
@@ -127,19 +128,19 @@ const handleDeleteAccount = () => {
     navigate('/login'); // 로그인 페이지로 리다이렉션 (필요에 따라 수정)
 };
 
-const handleCheck = (selectedDate, recipe) => {
-    console.log(selectedDate);
-    console.log(recipe);
+// const handleCheck = (selectedDate, recipe) => {
+//     console.log(selectedDate);
+//     console.log(recipe);
 
-    const formattedDate = selectedDate.toISOString().split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
-    setRecipesByDate(prev => {
-        const existingRecipes = prev[formattedDate] || [];
-        return {
-            ...prev,
-            [formattedDate]: [...existingRecipes, recipe]
-        };
-    });
-};
+//     const formattedDate = selectedDate.toISOString().split('T')[0]; // 'YYYY-MM-DD' 형식으로 변환
+//     setRecipesByDate(prev => {
+//         const existingRecipes = prev[formattedDate] || [];
+//         return {
+//             ...prev,
+//             [formattedDate]: [...existingRecipes, recipe]
+//         };
+//     });
+// };
 
 // 페이지당 표시할 항목 계산
 const indexOfLast = currentPage * resultsPerPage;
@@ -186,7 +187,7 @@ return (
                             
                             onClick={() => {
                                 console.log(item);
-                                handleRecipeClick(item)}}
+                                handleRecipeClick(item.RCP_NM)}}
                         >
                             <p >{item}</p>{/* **클릭 시 handleRecipeClick 호출** */}
 
@@ -237,18 +238,7 @@ return (
                 onClose={() => setSelectedRecipe(null)} // 모달 닫기
                 imgUrl={selectedRecipe.imgUrl} // 레시피 이미지 (예시)
                 title={selectedRecipe.title} // 레시피 제목 (예시)
-                content={selectedRecipe.content} // 레시피 내용 (예시)
-
-                info={{
-
-                    INFO_WGT: selectedRecipe.COOKRCP01.row[0].INFO_WGT,
-                    INFO_ENG: selectedRecipe.COOKRCP01.row[0].INFO_ENG,
-                    INFO_CAR: selectedRecipe.COOKRCP01.row[0].INFO_CAR,
-                    INFO_PRO: selectedRecipe.COOKRCP01.row[0].INFO_PRO,
-                    INFO_FAT: selectedRecipe.COOKRCP01.row[0].INFO_FAT,
-                    INFO_NA: selectedRecipe.COOKRCP01.row[0].INFO_NA,
-                    RCP_MANUAL: menu
-                }}
+                content={selectedRecipe.info} // 레시피 내용 (예시)
             />
         )}
 

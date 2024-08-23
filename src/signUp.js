@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './signUp.css';
 
 function SignUp() {
@@ -109,6 +109,7 @@ function SignUp() {
                 body: formData,
             });
             alert("가입완료");
+            handleCancel();
             window.location.href = '/login';
 
            
@@ -131,6 +132,10 @@ function SignUp() {
         setGeneralError('');
         setIdChecked(false);
     };
+
+    // useEffect(() => {
+    //     handleCancel(); // 페이지 로드 시 상태 초기화
+    // }, []);
 
     return (
         <div className="signup-container">
